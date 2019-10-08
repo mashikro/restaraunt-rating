@@ -19,8 +19,12 @@ def sort_print_resto(rating_dict):
 import random 
 def user_choice():
     print("What do you want to do? ")
-    print("""You can A. See the restaraunt list. B. Add your own rating. 
-        C. Update a random restarount's rathing D. Quit""")
+    print("""You can:
+        A. See the restaraunt list. 
+        B. Add your own restaraunt + rating. 
+        C. Update a random restarount's rating 
+        D. Update a chosen restaraunt's rating
+        E. Quit""")
     decision = input("Your choice: > ")
 
     return decision.upper()
@@ -37,7 +41,7 @@ def read_ratings(text_file):
 
     decision = user_choice()
  
-    while decision != 'D':
+    while decision != 'E':
 
         if decision == 'A':
             sort_print_resto(rating_dict)
@@ -51,6 +55,14 @@ def read_ratings(text_file):
             print('How would you rate this restaraunt: {}'. format(random_resto))
             rating = input('Your rating: > ')
             rating_dict[random_resto] = rating
+            decision = user_choice()
+        elif decision == 'D':
+            for item in rating_dict:
+                print(f'{item}:{rating_dict[item]}')
+            chosen_resto = input('Which restaraunt from above would you like to update? > ')
+            chosen_resto = chosen_resto.title()
+            new_rating = input('Your rating: > ')
+            rating_dict[chosen_resto] = new_rating
             decision = user_choice()
         else:
             print('That was not a valid answer')
